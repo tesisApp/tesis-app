@@ -68,6 +68,7 @@ const Profile = () => {
     }
 
     const updateProfile = async() => {
+        //console.log
         const validFirstName = validateFirstName()
         const validLastName = validateLastName()
         const validEmail = validateEmails()
