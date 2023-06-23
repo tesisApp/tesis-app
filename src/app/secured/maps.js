@@ -139,8 +139,8 @@ const Maps =({route,navigation})=>{
     <>
         <View style={styles.container}>
             <MapView 
-                    showsUserLocation
-                    initialRegion={{latitude: Number(latitude), longitude: Number(longitude)}}
+                    // showsUserLocation
+                    // initialRegion={{latitude: Number(latitude), longitude: Number(longitude)}}
                     onPress={(e) => console.log(e.nativeEvent.coordinate)}
                     style={styles.map}>
                 <Marker
