@@ -131,7 +131,7 @@ const FormCoordinates = () => {
                             {/* <Marker coordinate={coords}></Marker> */}
                         </MapView>
                     </View>
-                    <View  style={{marginBottom:20, padding: 10, marginTop: 10}}>
+                    <View  style={{marginBottom:20, padding: 10, marginTop: 70}}>
                         {
                             radius.length > 0 ? 
                             <Button 
