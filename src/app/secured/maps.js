@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react'
 import MapView, { Circle } from 'react-native-maps'
 import { Marker } from 'react-native-maps'
+import {PROVIDER_GOOGLE} from 'react-native-maps'
+
 import { StyleSheet, Text, View, Dimensions, Button, Image } from 'react-native'
 import * as geolib from 'geolib'
 import * as Notifications from 'expo-notifications'
@@ -139,6 +141,7 @@ const Maps =({route,navigation})=>{
     <>
         <View style={styles.container}>
             <MapView 
+                    provider={PROVIDER_GOOGLE}
                     // showsUserLocation
                     // initialRegion={{latitude: Number(latitude), longitude: Number(longitude)}}
                     onPress={(e) => console.log(e.nativeEvent.coordinate)}

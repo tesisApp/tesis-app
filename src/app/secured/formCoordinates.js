@@ -4,6 +4,7 @@ import { FormControl, Input, VStack, Button, Text } from "native-base"
 import { useNavigation } from '@react-navigation/native'
 import MapView from 'react-native-maps'
 import { Marker } from 'react-native-maps'
+import {PROVIDER_GOOGLE} from 'react-native-maps'
 import { FIRESTORE_AUTH,FIRESTORE_DB } from '../../utils/firebase.config'
 import { collection, query, getDocs, where, updateDoc, doc } from 'firebase/firestore'
 import * as Location from 'expo-location'
@@ -123,6 +124,7 @@ const FormCoordinates = () => {
                     
                     <View style={{height:250, marginTop: 10}}>
                         <MapView 
+                            provider={PROVIDER_GOOGLE}
                             onPress={(e) => saveCoordinates(e.nativeEvent.coordinate)}
                             style={styles.map}>
                             {
