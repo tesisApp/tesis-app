@@ -91,7 +91,7 @@ const Maps =({route,navigation})=>{
                 sendMessage(expoPushToken)
             }    
         })
-    },[])
+    },[expoPushToken])
 
     const notificacion = () => {
         //push notification
@@ -112,7 +112,6 @@ const Maps =({route,navigation})=>{
         return () => {
             Notifications.removeNotificationSubscription(notificationListener.current)
             Notifications.removeNotificationSubscription(responseListener.current)
-
         }
     }
 
