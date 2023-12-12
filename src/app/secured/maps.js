@@ -8,7 +8,7 @@ import * as geolib from 'geolib'
 import * as Notifications from 'expo-notifications'
 import Constants from 'expo-constants'
 import Device from 'expo-device'
-import { getDatabase, ref, get } from 'firebase/database'
+import { getDatabase, ref, get, onValue } from 'firebase/database'
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -34,37 +34,63 @@ const Maps =({route,navigation})=>{
     const notificationListener = useRef()
     const responseListener = useRef()
 
-    const getData= async (lat,lng)=> {
+    // const getData= async (lat,lng)=> {
+    //     const db = getDatabase()
+    //     await get(ref(db, 'location/')).then((snapshot) => {
+    //         console.log('SNAPSHOT', snapshot.val().latitude, '-', snapshot.val().longitude)
+    //         setLatitude(snapshot.val().latitude)
+    //         setLongitude(snapshot.val().longitude)
+    //         const coordinates = {
+    //             latitude: snapshot.val().latitude,
+    //             longitude: snapshot.val().longitude
+    //         }
+           
+    //         setCoords({
+    //             latitude: lat,
+    //             longitude: lng
+    //         })
+
+    //         const centerPoint = {
+    //             latitude: lat,
+    //             longitude: lng
+    //         }
+    //         insideRadius = geolib.isPointWithinRadius(coordinates, centerPoint, 200)
+
+    //         // if ( !insideRadius) {
+    //         //     sendMessage(expoPushToken)
+    //         //     console.log('fuera de rango')
+    //         // }    
+    //     })
+    // }
+
+    useEffect(()=>{
+        notificacion()
+       
         const db = getDatabase()
-        await get(ref(db, 'location/')).then((snapshot) => {
+        const query = ref(db, 'location')
+
+        return onValue(query, (snapshot) => {
             setLatitude(snapshot.val().latitude)
             setLongitude(snapshot.val().longitude)
             const coordinates = {
                 latitude: snapshot.val().latitude,
                 longitude: snapshot.val().longitude
             }
-           
+
             setCoords({
-                latitude: lat,
-                longitude: lng
+                latitude: route.params.lat,
+                longitude: route.params.lng
             })
 
             const centerPoint = {
-                latitude: lat,
-                longitude: lng
+                latitude: route.params.lat,
+                longitude: route.params.lng
             }
-            insideRadius = geolib.isPointWithinRadius(coordinates, centerPoint, 200)
-
+            insideRadius = geolib.isPointWithinRadius(coordinates, centerPoint, route.params.radius)
             if ( !insideRadius) {
                 sendMessage(expoPushToken)
-                console.log('fuera de rango')
             }    
         })
-    }
-
-    useEffect(()=>{
-        notificacion()
-        getData(route.params.lat, route.params.lng)
     },[])
 
     const notificacion = () => {

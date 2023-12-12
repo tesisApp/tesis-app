@@ -68,13 +68,12 @@ const Profile = () => {
     }
 
     const updateProfile = async() => {
-        //console.log
         const validFirstName = validateFirstName()
         const validLastName = validateLastName()
         const validEmail = validateEmails()
         if ( validFirstName && validLastName && validEmail ) {
-            console.log('valido')
             const docRef = doc(FIRESTORE_DB, 'usuario', docId)
+            
             await updateEmail(FIRESTORE_AUTH.currentUser, email).then(async() => {
                 await updateDoc(docRef, {
                     firstName: firstName,

@@ -10,10 +10,10 @@ const Welcome=()=>{
     const [isCoordinate, setIsCoordinate]= useState(false)
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
+    const [radius, setRadius] = useState(null)
     const isFocused = useIsFocused()
 
     useEffect(() => {
-        console.log('welcome')
         const userCurrent = FIRESTORE_AUTH.currentUser
         if (userCurrent) {
             const docRef = collection(FIRESTORE_DB, 'usuario')
@@ -22,20 +22,19 @@ const Welcome=()=>{
                 (await getDocs(q)).forEach((doc) => {
                     setLatitude(doc.data().latitude)
                     setLongitude(doc.data().longitude)
+                    setRadius(doc.data().radius)
                     setIsCoordinate( doc.data().latitude != '' && doc.data().longitude != '' ? true : false)
                 })
             }
             loadData()
         }
-        console.log(userCurrent)
-        
     },[isFocused])
 
     const goMaps = () => {
-        console.log('gomaps')
         navigation.navigate('Maps', {
             lat: latitude,
-            lng: longitude
+            lng: longitude,
+            radius: radius
         })
     }
 
