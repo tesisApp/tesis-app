@@ -167,10 +167,10 @@ const Maps =({route,navigation})=>{
         <View style={styles.container}>
             <MapView 
                     provider={PROVIDER_GOOGLE}
-                    // showsUserLocation
-                    // initialRegion={{latitude: Number(latitude), longitude: Number(longitude)}}
                     onPress={(e) => console.log(e.nativeEvent.coordinate)}
-                    style={styles.map}>
+                    style={styles.map}
+                    region={{latitude: Number(route.params.lat), longitude: Number(route.params.lng), latitudeDelta: 0.0922, longitudeDelta: 0.0421}}
+                    >
                 <Marker
                     coordinate={coords}
                 ></Marker>
@@ -188,7 +188,7 @@ const Maps =({route,navigation})=>{
                 </Marker>
                 <Circle
                     center={coords}
-                    radius={200}
+                    radius={route.params.radius}
                     fillColor={'rgba(100,100,200,0.3)'}
                 ></Circle>
             </MapView>
