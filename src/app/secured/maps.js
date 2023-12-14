@@ -72,6 +72,7 @@ const Maps =({route,navigation})=>{
         return onValue(query, (snapshot) => {
             setLatitude(snapshot.val().latitude)
             setLongitude(snapshot.val().longitude)
+            console.log("snapshot", snapshot)
             const coordinates = {
                 latitude: snapshot.val().latitude,
                 longitude: snapshot.val().longitude
@@ -88,6 +89,7 @@ const Maps =({route,navigation})=>{
             }
             insideRadius = geolib.isPointWithinRadius(coordinates, centerPoint, route.params.radius)
             if ( !insideRadius) {
+                console.log("fuera de rango")
                 sendMessage(expoPushToken)
             }    
         })

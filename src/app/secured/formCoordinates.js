@@ -55,7 +55,8 @@ const FormCoordinates = () => {
                         
                         setCoords({
                             latitude: doc.data().latitude,
-                            longitude: doc.data().longitude
+                            longitude: doc.data().longitude,
+                            
                         })
                         setAddress(`${address[0].street} ${address[0].streetNumber}`)
                     } else {
@@ -126,6 +127,7 @@ const FormCoordinates = () => {
                         <MapView 
                             provider={PROVIDER_GOOGLE}
                             onPress={(e) => saveCoordinates(e.nativeEvent.coordinate)}
+                            region={{latitude: Number(latitude), longitude: Number(longitude), latitudeDelta: 0.0922, longitudeDelta: 0.0421}}
                             style={styles.map}>
                             {
                                 isCoordinate === true ? <Marker  coordinate={coords}></Marker> : <></>
