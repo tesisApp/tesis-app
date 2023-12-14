@@ -14,6 +14,8 @@ const DrawerContent=(props)=>{
     const [user, setUser] = useState('')
     const [latitude, setLatitude] = useState('')
     const [longitude, setLongitude] = useState('')
+    const [radius, setRadius] = useState(null)
+
     const isFocused = useIsFocused()
 
     //const navigation=useNavigation()
@@ -48,6 +50,7 @@ const DrawerContent=(props)=>{
                 forEach( async(doc) => {
                     setLatitude(doc.data().latitude)
                     setLongitude(doc.data().longitude)
+                    setRadius(doc.data().radius)
                 })
         }
         loadData()
@@ -74,7 +77,7 @@ const DrawerContent=(props)=>{
                 </View>
                 <View style={styles.opcionDrawer}>
                     <Icon name='location' style={styles.icon} />
-                    <Text style={styles.textDrawer} onPress={()=> navigation.navigate('Maps', { lat: latitude, lng: longitude})}>
+                    <Text style={styles.textDrawer} onPress={()=> navigation.navigate('Maps', { lat: latitude, lng: longitude, radius: radius })}>
                         Mapa
                     </Text>
                 </View>
